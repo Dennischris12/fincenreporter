@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Create BOI Filing</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Create BOI Filing</h1>
+        <form action="/new-filing" method="POST" enctype="multipart/form-data">
+
+            <!-- Type of Filing -->
+            <h3>Filing Information</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="filingType" class="form-label">Type of Filing</label>
+                    <select class="form-select" id="filingType" name="filingType" required>
+                        <option value="">Select Filing Type</option>
+                        <option value="Initial Report">Initial Report</option>
+                        <option value="Correct Prior Report">Correct Prior Report</option>
+                        <option value="Update Prior Report">Update Prior Report</option>
+                        <option value="Newly Exempt Entity">Newly Exempt Entity</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="datePrepared" class="form-label">Date Prepared</label>
+                    <input type="text" class="form-control" id="datePrepared" name="datePrepared" readonly value="{{ today_date }}">
+                </div>
+            </div>
+
+            <!-- Reporting Company Information -->
+            <h3>Reporting Company Information</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="idType" class="form-label">Tax Identification Type</label>
+                    <select class="form-select" id="idType" name="idType" required>
+                        <option value="">Select ID Type</option>
+                        <option value="EIN">EIN</option>
+                        <option value="SSN/ITIN">SSN/ITIN</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="idNumber" class="form-label">Tax Identification Number</label>
+                    <input type="text" class="form-control" id="idNumber" name="idNumber" required maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="stateOfFormation" class="form-label">State of Formation</label>
+                    <select class="form-select" id="stateOfFormation" name="stateOfFormation" required>
+                        <option value="">Select State</option>
+                        <option value="Alabama">Alabama</option>
+<option value="Alaska">Alaska</option>
+<option value="Arizona">Arizona</option>
+<option value="Arkansas">Arkansas</option>
+<option value="California">California</option>
+<option value="Colorado">Colorado</option>
+<option value="Connecticut">Connecticut</option>
+<option value="Delaware">Delaware</option>
+<option value="Florida">Florida</option>
+<option value="Georgia">Georgia</option>
+<option value="Hawaii">Hawaii</option>
+<option value="Idaho">Idaho</option>
+<option value="Illinois">Illinois</option>
+<option value="Indiana">Indiana</option>
+<option value="Iowa">Iowa</option>
+<option value="Kansas">Kansas</option>
+<option value="Kentucky">Kentucky</option>
+<option value="Louisiana">Louisiana</option>
+<option value="Maine">Maine</option>
+<option value="Maryland">Maryland</option>
+<option value="Massachusetts">Massachusetts</option>
+<option value="Michigan">Michigan</option>
+<option value="Minnesota">Minnesota</option>
+<option value="Mississippi">Mississippi</option>
+<option value="Missouri">Missouri</option>
+<option value="Montana">Montana</option>
+<option value="Nebraska">Nebraska</option>
+<option value="Nevada">Nevada</option>
+<option value="New Hampshire">New Hampshire</option>
+<option value="New Jersey">New Jersey</option>
+<option value="New Mexico">New Mexico</option>
+<option value="New York">New York</option>
+<option value="North Carolina">North Carolina</option>
+<option value="North Dakota">North Dakota</option>
+<option value="Ohio">Ohio</option>
+<option value="Oklahoma">Oklahoma</option>
+<option value="Oregon">Oregon</option>
+<option value="Pennsylvania">Pennsylvania</option>
+<option value="Rhode Island">Rhode Island</option>
+<option value="South Carolina">South Carolina</option>
+<option value="South Dakota">South Dakota</option>
+<option value="Tennessee">Tennessee</option>
+<option value="Texas">Texas</option>
+<option value="Utah">Utah</option>
+<option value="Vermont">Vermont</option>
+<option value="Virginia">Virginia</option>
+<option value="Washington">Washington</option>
+<option value="West Virginia">West Virginia</option>
+<option value="Wisconsin">Wisconsin</option>
+<option value="Wyoming">Wyoming</option>
+
+                        <!-- Add other states -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="reportingCompanyCountry" class="form-label">Country of Formation</label>
+                    <select class="form-select" id="reportingCompanyCountry" name="reportingCompanyCountry" required>
+                        <option value="United States">United States</option>
+                        <!-- Add other countries -->
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="reportingCompanyAddress" class="form-label">Address</label>
+                <input type="text" class="form-control" id="reportingCompanyAddress" name="reportingCompanyAddress" required>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="reportingCompanyCity" class="form-label">City</label>
+                    <input type="text" class="form-control" id="reportingCompanyCity" name="reportingCompanyCity" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="reportingCompanyState" class="form-label">State</label>
+                    <select class="form-select" id="reportingCompanyState" name="reportingCompanyState" required>
+<option value="">Select State</option>                     
+  <option value="Alabama">Alabama</option>
+<option value="Alaska">Alaska</option>
+<option value="Arizona">Arizona</option>
+<option value="Arkansas">Arkansas</option>
+<option value="California">California</option>
+<option value="Colorado">Colorado</option>
+<option value="Connecticut">Connecticut</option>
+<option value="Delaware">Delaware</option>
+<option value="Florida">Florida</option>
+<option value="Georgia">Georgia</option>
+<option value="Hawaii">Hawaii</option>
+<option value="Idaho">Idaho</option>
+<option value="Illinois">Illinois</option>
+<option value="Indiana">Indiana</option>
+<option value="Iowa">Iowa</option>
+<option value="Kansas">Kansas</option>
+<option value="Kentucky">Kentucky</option>
+<option value="Louisiana">Louisiana</option>
+<option value="Maine">Maine</option>
+<option value="Maryland">Maryland</option>
+<option value="Massachusetts">Massachusetts</option>
+<option value="Michigan">Michigan</option>
+<option value="Minnesota">Minnesota</option>
+<option value="Mississippi">Mississippi</option>
+<option value="Missouri">Missouri</option>
+<option value="Montana">Montana</option>
+<option value="Nebraska">Nebraska</option>
+<option value="Nevada">Nevada</option>
+<option value="New Hampshire">New Hampshire</option>
+<option value="New Jersey">New Jersey</option>
+<option value="New Mexico">New Mexico</option>
+<option value="New York">New York</option>
+<option value="North Carolina">North Carolina</option>
+<option value="North Dakota">North Dakota</option>
+<option value="Ohio">Ohio</option>
+<option value="Oklahoma">Oklahoma</option>
+<option value="Oregon">Oregon</option>
+<option value="Pennsylvania">Pennsylvania</option>
+<option value="Rhode Island">Rhode Island</option>
+<option value="South Carolina">South Carolina</option>
+<option value="South Dakota">South Dakota</option>
+<option value="Tennessee">Tennessee</option>
+<option value="Texas">Texas</option>
+<option value="Utah">Utah</option>
+<option value="Vermont">Vermont</option>
+<option value="Virginia">Virginia</option>
+<option value="Washington">Washington</option>
+<option value="West Virginia">West Virginia</option>
+<option value="Wisconsin">Wisconsin</option>
+<option value="Wyoming">Wyoming</option>
+
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="reportingCompanyZip" class="form-label">ZIP Code</label>
+                    <input type="text" class="form-control" id="reportingCompanyZip" name="reportingCompanyZip" required maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9)">
+                </div>
+            </div>
+
+            <!-- Company Applicant -->
+          <h3>Company Applicant</h3>
+<div class="row">
+    <div class="col-md-4">
+        <label for="applicantFirstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="applicantFirstName" name="applicantFirstName" required>
+    </div>
+    <div class="col-md-4">
+        <label for="applicantLastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="applicantLastName" name="applicantLastName" required>
+    </div>
+    <div class="col-md-4">
+        <label for="applicantMiddleName" class="form-label">Middle Name (Optional)</label>
+        <input type="text" class="form-control" id="applicantMiddleName" name="applicantMiddleName">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <label for="applicantDateOfBirth" class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" id="applicantDateOfBirth" name="applicantDateOfBirth" required>
+    </div>
+    <div class="col-md-4">
+        <label for="applicantAddressType" class="form-label">Address Type</label>
+        <select class="form-select" id="applicantAddressType" name="applicantAddressType" required>
+            <option value="Business">Business</option>
+            <option value="Residential">Residential</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="applicantFinCenId" class="form-label">FinCen ID (Optional)</label>
+        <input type="text" class="form-control" id="applicantFinCenId" name="applicantFinCenId">
+    </div>
+</div>
+<div class="mb-3">
+    <label for="applicantStreetAddress" class="form-label">Street Address</label>
+    <input type="text" class="form-control" id="applicantStreetAddress" name="applicantStreetAddress" required>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <label for="applicantCity" class="form-label">City</label>
+        <input type="text" class="form-control" id="applicantCity" name="applicantCity" required>
+    </div>
+    <div class="col-md-4">
+        <label for="applicantState" class="form-label">State</label>
+        <select class="form-select" id="applicantState" name="applicantState" required>
+            <option value="">Select State</option>
+           <option value="Alabama">Alabama</option>
+<option value="Alaska">Alaska</option>
+<option value="Arizona">Arizona</option>
+<option value="Arkansas">Arkansas</option>
+<option value="California">California</option>
+<option value="Colorado">Colorado</option>
+<option value="Connecticut">Connecticut</option>
+<option value="Delaware">Delaware</option>
+<option value="Florida">Florida</option>
+<option value="Georgia">Georgia</option>
+<option value="Hawaii">Hawaii</option>
+<option value="Idaho">Idaho</option>
+<option value="Illinois">Illinois</option>
+<option value="Indiana">Indiana</option>
+<option value="Iowa">Iowa</option>
+<option value="Kansas">Kansas</option>
+<option value="Kentucky">Kentucky</option>
+<option value="Louisiana">Louisiana</option>
+<option value="Maine">Maine</option>
+<option value="Maryland">Maryland</option>
+<option value="Massachusetts">Massachusetts</option>
+<option value="Michigan">Michigan</option>
+<option value="Minnesota">Minnesota</option>
+<option value="Mississippi">Mississippi</option>
+<option value="Missouri">Missouri</option>
+<option value="Montana">Montana</option>
+<option value="Nebraska">Nebraska</option>
+<option value="Nevada">Nevada</option>
+<option value="New Hampshire">New Hampshire</option>
+<option value="New Jersey">New Jersey</option>
+<option value="New Mexico">New Mexico</option>
+<option value="New York">New York</option>
+<option value="North Carolina">North Carolina</option>
+<option value="North Dakota">North Dakota</option>
+<option value="Ohio">Ohio</option>
+<option value="Oklahoma">Oklahoma</option>
+<option value="Oregon">Oregon</option>
+<option value="Pennsylvania">Pennsylvania</option>
+<option value="Rhode Island">Rhode Island</option>
+<option value="South Carolina">South Carolina</option>
+<option value="South Dakota">South Dakota</option>
+<option value="Tennessee">Tennessee</option>
+<option value="Texas">Texas</option>
+<option value="Utah">Utah</option>
+<option value="Vermont">Vermont</option>
+<option value="Virginia">Virginia</option>
+<option value="Washington">Washington</option>
+<option value="West Virginia">West Virginia</option>
+<option value="Wisconsin">Wisconsin</option>
+<option value="Wyoming">Wyoming</option>
+
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="applicantZip" class="form-label">ZIP Code</label>
+        <input type="text" class="form-control" id="applicantZip" name="applicantZip" required maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9)">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <label for="applicantIdType" class="form-label">Type of ID</label>
+        <select class="form-select" id="applicantIdType" name="applicantIdType" required>
+            <option value="">Select ID Type</option>
+            <option value="Driver's License">Driver's License</option>
+            <option value="Passport">Passport</option>
+            <option value="Local/Tribal">Local/Tribal</option>
+           
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label for="applicantIdNumber" class="form-label">ID Number</label>
+        <input type="text" class="form-control" id="applicantIdNumber" name="applicantIdNumber" required>
+    </div>
+    <div class="col-md-4">
+        <label for="applicantIdUpload" class="form-label">Upload ID</label>
+        <input type="file" class="form-control" id="applicantIdUpload" name="applicantIdUpload" required>
+    </div>
+<div class="col-md-4" id="companyApplicantStateField" style="display: none;">
+    <label for="issuingstate" class="form-label">Issuing State</label>
+    <select class="form-select" id="issuingstate" name="issuingstate">
+        <option value="">Select State</option>
+        <option value="Alabama">Alabama</option>
+        <option value="Alaska">Alaska</option>
+        <option value="Arizona">Arizona</option>
+        <option value="Arkansas">Arkansas</option>
+        <option value="California">California</option>
+        <option value="Colorado">Colorado</option>
+        <option value="Connecticut">Connecticut</option>
+        <option value="Delaware">Delaware</option>
+        <option value="Florida">Florida</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Hawaii">Hawaii</option>
+        <option value="Idaho">Idaho</option>
+        <option value="Illinois">Illinois</option>
+        <option value="Indiana">Indiana</option>
+        <option value="Iowa">Iowa</option>
+        <option value="Kansas">Kansas</option>
+        <option value="Kentucky">Kentucky</option>
+        <option value="Louisiana">Louisiana</option>
+        <option value="Maine">Maine</option>
+        <option value="Maryland">Maryland</option>
+        <option value="Massachusetts">Massachusetts</option>
+        <option value="Michigan">Michigan</option>
+        <option value="Minnesota">Minnesota</option>
+        <option value="Mississippi">Mississippi</option>
+        <option value="Missouri">Missouri</option>
+        <option value="Montana">Montana</option>
+        <option value="Nebraska">Nebraska</option>
+        <option value="Nevada">Nevada</option>
+        <option value="New Hampshire">New Hampshire</option>
+        <option value="New Jersey">New Jersey</option>
+        <option value="New Mexico">New Mexico</option>
+        <option value="New York">New York</option>
+        <option value="North Carolina">North Carolina</option>
+        <option value="North Dakota">North Dakota</option>
+        <option value="Ohio">Ohio</option>
+        <option value="Oklahoma">Oklahoma</option>
+        <option value="Oregon">Oregon</option>
+        <option value="Pennsylvania">Pennsylvania</option>
+        <option value="Rhode Island">Rhode Island</option>
+        <option value="South Carolina">South Carolina</option>
+        <option value="South Dakota">South Dakota</option>
+        <option value="Tennessee">Tennessee</option>
+        <option value="Texas">Texas</option>
+        <option value="Utah">Utah</option>
+        <option value="Vermont">Vermont</option>
+        <option value="Virginia">Virginia</option>
+        <option value="Washington">Washington</option>
+        <option value="West Virginia">West Virginia</option>
+        <option value="Wisconsin">Wisconsin</option>
+        <option value="Wyoming">Wyoming</option>
+    </select>
+</div>
+
+
+<div class="row" id="applicantTribalFields" style="display: none;">
+    <div class="col-md-6">
+        <label for="applicantLocalTribal" class="form-label">Local/Tribal</label>
+        <select class="form-select" id="applicantLocalTribal" name="applicantLocalTribal">
+            <option value="">Select Local/Tribal</option>
+            <option value="Absentee-Shawnee Tribe of Indians of Oklahoma">Absentee-Shawnee Tribe of Indians of Oklahoma</option>
+            <option value="Cherokee Nation">Cherokee Nation</option>
+            <option value="Choctaw Nation">Choctaw Nation</option>
+            <!-- Add other tribes as necessary -->
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="applicantOtherTribalDescription" class="form-label">Other Local/Tribal Description</label>
+        <input type="text" class="form-control" id="applicantOtherTribalDescription" name="applicantOtherTribalDescription">
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+            <!-- Beneficial Owners -->
+          <h3>Beneficial Owners</h3>
+<div id="ownersContainer">
+    <!-- Beneficial Owner Template -->
+    <div class="beneficial-owner border p-3 mb-3" id="beneficialOwner_1">
+        <h4>Owner 1</h4>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <label for="ownerFirstName_1" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="ownerFirstName_1" name="ownerFirstName[]" required>
+            </div>
+            <div class="col-md-4">
+                <label for="ownerLastName_1" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="ownerLastName_1" name="ownerLastName[]" required>
+            </div>
+            <div class="col-md-4">
+                <label for="ownerMiddleName_1" class="form-label">Middle Name (Optional)</label>
+                <input type="text" class="form-control" id="ownerMiddleName_1" name="ownerMiddleName[]">
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <label for="ownerDateOfBirth_1" class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" id="ownerDateOfBirth_1" name="ownerDateOfBirth[]" required>
+            </div>
+            <div class="col-md-4">
+                <label for="ownerAddressType_1" class="form-label">Address Type</label>
+                <select class="form-select" id="ownerAddressType_1" name="ownerAddressType[]" required>
+                    <option value="Business">Business</option>
+                    <option value="Residential">Residential</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="ownerStreetAddress_1" class="form-label">Street Address</label>
+                <input type="text" class="form-control" id="ownerStreetAddress_1" name="ownerStreetAddress[]" required>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <label for="ownerCity_1" class="form-label">City</label>
+                <input type="text" class="form-control" id="ownerCity_1" name="ownerCity[]" required>
+            </div>
+            <div class="col-md-4">
+                <label for="ownerState_1" class="form-label">State</label>
+                <select class="form-select" id="ownerState_1" name="ownerState[]" required>
+                    <option value="">Select State</option>
+                    <option value="Alabama">Alabama</option>
+                    <option value="Alaska">Alaska</option>
+                    <!-- Add other states -->
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="ownerZip_1" class="form-label">ZIP Code</label>
+                <input type="text" class="form-control" id="ownerZip_1" name="ownerZip[]" required maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9)">
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <label for="ownerCountry_1" class="form-label">Country</label>
+                <select class="form-select" id="ownerCountry_1" name="ownerCountry[]" required>
+                    <option value="United States">United States</option>
+                    <!-- Add other countries -->
+                </select>
+            </div>
+ 
+
+  <div>
+            <label for="ownerIdType_1">Type of ID</label>
+            <select class="form-select" id="ownerIdType_1" name="ownerIdType[]">
+                <option value="">Select ID Type</option>
+                <option value="Driver's License">Driver's License</option>
+                <option value="Local/Tribal">Local/Tribal</option>
+            </select>
+        </div>
+        <div>
+            <label for="ownerLocalTribal_1">Local/Tribal</label>
+            <select class="form-select" id="ownerLocalTribal_1" name="ownerLocalTribal[]">
+                <option value="">Select Local/Tribal</option>
+                <option value="Cherokee Nation">Cherokee Nation</option>
+            </select>
+        </div>
+        <div>
+            <label for="ownerOtherTribalDescription_1">Other Tribal Description</label>
+            <input type="text" class="form-control" id="ownerOtherTribalDescription_1" name="ownerOtherTribalDescription[]">
+        </div>
+        <div>
+            <label for="ownerIssuingState_1">Issuing State</label>
+            <select class="form-select" id="ownerIssuingState_1" name="ownerIssuingState[]">
+                <option value="">Select State</option>
+                <option value="California">California</option>
+            </select>
+        </div>
+
+
+ <div class="col-md-4">
+                <label for="ownerIdNumber_1" class="form-label">ID Number</label>
+                <input type="text" class="form-control" id="ownerIdNumber_1" name="ownerIdNumber[]" required>
+            </div>
+            <div class="col-md-4">
+                <label for="ownerIdUpload_1" class="form-label">Upload ID</label>
+                <input type="file" class="form-control" id="ownerIdUpload_1" name="ownerIdUpload[]" required>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-secondary" id="addOwnerButton">Add Another Owner</button>
+
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary">Review</button>
+        </form>
+    </div>
+
+<form action="/new-filing" method="POST" enctype="multipart/form-data">
+    <!-- Fields for filing data, like company name, ID type, etc. -->
+    <input type="text" name="company_name" required placeholder="Enter Company Name" />
+    <!-- Other form fields as necessary for the BOI filing -->
+    <input type="file" name="id_upload" required />
+    <button type="submit">Submit Filing</button>
+</form>
+
+<script>
+    // Company Applicant State Field
+    document.getElementById("applicantIdType").addEventListener("change", function () {
+        const stateField = document.getElementById("companyApplicantStateField");
+        stateField.style.display = this.value === "Driver's License" ? "block" : "none";
+    });
+
+    // Company Applicant: Toggle Local/Tribal Fields
+    document.getElementById("applicantIdType").addEventListener("change", function () {
+        const tribalFields = document.getElementById("applicantTribalFields");
+        tribalFields.style.display = this.value === "Local/Tribal" || this.value === "Other" ? "flex" : "none";
+    });
+
+    // Toggle fields dynamically for Local/Tribal and State
+    function toggleTribalFields(select, tribalField, otherTribalField, stateField) {
+        if (select.value === "Driver's License") {
+            tribalField.disabled = true;
+            otherTribalField.disabled = true;
+            stateField.disabled = false;
+        } else if (select.value === "Local/Tribal") {
+            tribalField.disabled = false;
+            otherTribalField.disabled = false;
+            stateField.disabled = true;
+        } else {
+            tribalField.disabled = true;
+            otherTribalField.disabled = true;
+            stateField.disabled = true;
+        }
+    }
+
+    // Attach event listeners for a specific owner
+    function attachOwnerEventListeners(ownerId) {
+        const idTypeField = document.querySelector(`#ownerIdType_${ownerId}`);
+        const tribalField = document.querySelector(`#ownerLocalTribal_${ownerId}`);
+        const otherTribalField = document.querySelector(`#ownerOtherTribalDescription_${ownerId}`);
+        const stateField = document.querySelector(`#ownerIssuingState_${ownerId}`);
+
+        idTypeField.addEventListener("change", function () {
+            toggleTribalFields(idTypeField, tribalField, otherTribalField, stateField);
+        });
+
+        // Initial state for fields
+        toggleTribalFields(idTypeField, tribalField, otherTribalField, stateField);
+    }
+
+    // Add a new owner dynamically
+    document.getElementById("addOwnerButton").addEventListener("click", function () {
+        const ownerContainer = document.querySelector("#ownersContainer");
+        const ownerCount = ownerContainer.querySelectorAll(".beneficial-owner").length + 1;
+
+        const firstOwner = document.querySelector(".beneficial-owner");
+        const newOwner = firstOwner.cloneNode(true);
+
+        newOwner.id = `beneficialOwner_${ownerCount}`;
+        newOwner.querySelector("h4").textContent = `Owner ${ownerCount}`;
+
+        Array.from(newOwner.querySelectorAll("input, select")).forEach((field) => {
+            if (field.id) {
+                field.id = field.id.replace(/_\d+$/, `_${ownerCount}`);
+            }
+            if (field.name) {
+                field.name = field.name.replace(/\[\]$/, "[]");
+            }
+            field.value = ""; // Clear field value
+            field.disabled = false; // Reset disabled state
+        });
+
+        // Add a remove button for the new owner
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.classList.add("btn", "btn-danger", "mt-2");
+        removeButton.textContent = "Remove Owner";
+        removeButton.addEventListener("click", function () {
+            newOwner.remove();
+        });
+
+        newOwner.appendChild(removeButton);
+
+        ownerContainer.appendChild(newOwner);
+
+        // Attach event listeners for the new owner
+        attachOwnerEventListeners(ownerCount);
+    });
+
+    // Initialize event listeners for the first owner
+    document.addEventListener("DOMContentLoaded", function () {
+        attachOwnerEventListeners(1); // Attach to the first owner
+    });
+
+
+</script>
+
+</body>
+</html>

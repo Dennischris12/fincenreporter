@@ -1,0 +1,37 @@
+<form action="/review" method="POST">
+    <!-- Display filing data for review -->
+    <h3>Review Your Filing</h3>
+    <p>Company: {{ filing.company_name }}</p>
+
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <button id="payButton">Pay $150</button>
+    <script>
+        var handler = StripeCheckout.configure({
+            key: 'your_stripe_publishable_key',
+            image: '/your-logo.png',
+            locale: 'auto',
+            token: function(token) {
+                // Send the token to your server for processing
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/review';
+                var hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = 'stripeToken';
+                hiddenField.value = token.id;
+                form.appendChild(hiddenField);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+
+        document.getElementById('payButton').addEventListener('click', function(e) {
+            handler.open({
+                name: 'BOI Filing Payment',
+                description: 'BOI Filing Submission Fee',
+                amount: 15000  // $150 in cents
+            });
+            e.preventDefault();
+        });
+    </script>
+</form>
