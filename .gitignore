@@ -1,0 +1,19 @@
+# Ignore environment files
+.env
+
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore virtual environment folder
+venv/
+
+# Ignore .DS_Store (Mac)
+.DS_Store
+
+# Ignore database file
+boi_filing.db
+
+# Ignore uploads/pdfs directory
+/static/uploads/
+/static/pdfs/
