@@ -8,9 +8,6 @@ __pycache__/
 # Ignore virtual environment folder
 venv/
 
-# Ignore .DS_Store (Mac)
-.DS_Store
-
 # Ignore database file
 boi_filing.db
 
